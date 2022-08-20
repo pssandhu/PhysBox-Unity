@@ -12,7 +12,7 @@
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
-/[Mm]emoryCaptures/
+/[Mm]emory[Cc]aptures/
 
 # Recordings can get excessive in size
 /[Rr]ecordings/
@@ -52,6 +52,11 @@ ExportedObj/
 *.pdb.meta
 *.mdb.meta
 
+# Ignore: name.meta, then include: name.extension.meta
+# Uncomment BOTH lines to ignore folder .meta files only
+# *.meta
+# !*.*.meta
+
 # Unity3D generated file on crash reports
 sysinfo.txt
 
@@ -84,3 +89,18 @@ crashlytics-build.properties
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# FMOD Unity
+# !/[Aa]ssets/Plugins/FMOD/**/lib/*
+# !/[Aa]ssets/Gizmos/FMOD/*
+# !/[Aa]ssets/Editor Default Resources/FMOD/*
+# /[Aa]ssets/Plugins/FMOD/Cache/*
+# /[Aa]ssets/StreamingAssets/**/*.bank
+# /[Aa]ssets/StreamingAssets/**/*.bank.meta
+# fmod_editor.log
+
+# FMOD Project
+# /FMODProject/.cache/
+# /FMODProject/.unsaved/
+# /FMODProject/.user/
+# /FMODProject/Assets/
