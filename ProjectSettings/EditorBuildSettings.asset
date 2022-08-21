@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SinusoidalSpeedComponents.unity
     guid: 91b47efc7b559d24e8b2ede06a29dc0e
+  - enabled: 1
+    path: Assets/Scenes/Pendulum.unity
+    guid: 35d87f0c1cbca8d4c94a89ce1207ab11
   m_configObjects: {}
