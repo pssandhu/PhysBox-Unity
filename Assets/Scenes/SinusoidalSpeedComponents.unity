@@ -332,12 +332,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 942524368}
     - target: {fileID: 714264941492791950, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
+      propertyPath: TargetSlider
+      value: 
+      objectReference: {fileID: 942524370}
+    - target: {fileID: 714264941492791950, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: UpdateSliderWithoutNotify
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4570729550794343967, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_Name
-      value: SliderInputField (1)
+      value: VSliderInputField
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
@@ -825,7 +829,7 @@ GameObject:
   - component: {fileID: 850927744}
   - component: {fileID: 850927743}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1189,7 +1193,7 @@ GameObject:
   - component: {fileID: 1544781768}
   - component: {fileID: 1544781767}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: VText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1983,12 +1987,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1387378798}
     - target: {fileID: 714264941492791950, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
+      propertyPath: TargetSlider
+      value: 
+      objectReference: {fileID: 1387378800}
+    - target: {fileID: 714264941492791950, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: UpdateSliderWithoutNotify
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4570729550794343967, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_Name
-      value: SliderInputField
+      value: HSliderInputField
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}

@@ -6,17 +6,14 @@ using UnityEngine.UI;
 
 public class MainMenuActivity : MonoBehaviour {
 
-    [SerializeField]
-    public string ActivityName;
+    [SerializeField] private string ActivityName;
+    [SerializeField] private string ActivityDescription;
 
-    [SerializeField]
-    public string ActivityDescription;
-
-    public void Start() {
-        gameObject.GetComponent<Button>().onClick.AddListener(PreviewActivity);
+    void Start() {
+        GetComponent<Button>().onClick.AddListener(PreviewActivity);
     }
 
-    public void PreviewActivity() {
+    void PreviewActivity() {
         if (MainMenuController.Instance.Sidebar.activeInHierarchy == false) {
             MainMenuController.Instance.Sidebar.SetActive(true);
         }

@@ -557,6 +557,10 @@ PrefabInstance:
       propertyPath: Slider
       value: 
       objectReference: {fileID: 152277153}
+    - target: {fileID: 714264941492791950, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
+      propertyPath: TargetSlider
+      value: 
+      objectReference: {fileID: 152277155}
     - target: {fileID: 714264942781846554, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_text
       value: "150\u200B"
@@ -2232,6 +2236,10 @@ PrefabInstance:
       propertyPath: Slider
       value: 
       objectReference: {fileID: 538162754}
+    - target: {fileID: 714264941492791950, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
+      propertyPath: TargetSlider
+      value: 
+      objectReference: {fileID: 538162756}
     - target: {fileID: 714264942781846554, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_text
       value: "-30\u200B"

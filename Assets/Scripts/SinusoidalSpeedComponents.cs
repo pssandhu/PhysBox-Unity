@@ -6,12 +6,8 @@ using UnityEngine.UI;
 
 public class SinusoidalSpeedComponents : MonoBehaviour {
 
-    [SerializeField]
-    private Slider HSlider;
-
-    [SerializeField]
-    private Slider VSlider;
-
+    [SerializeField] private Slider HSlider;
+    [SerializeField] private Slider VSlider;
     private TrailRenderer trail;
 
     // Set initial values in inspector

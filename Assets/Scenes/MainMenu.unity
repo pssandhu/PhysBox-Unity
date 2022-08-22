@@ -1348,7 +1348,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DescriptionBox: {fileID: 681188436}
   Sidebar: {fileID: 1633114211}
-  SelectedActivity: 
 --- !u!4 &776065697
 Transform:
   m_ObjectHideFlags: 0
@@ -1885,7 +1884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3512404038793520529, guid: 97f63617aa5dc8441b61d12e35114841, type: 3}
       propertyPath: m_Name
-      value: ActivityButton
+      value: Pendulum
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97f63617aa5dc8441b61d12e35114841, type: 3}

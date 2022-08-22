@@ -7,13 +7,9 @@ public class MainMenuController : MonoBehaviour {
 
     public static MainMenuController Instance;
 
-    [SerializeField]
-    public GameObject DescriptionBox;
-
-    [SerializeField]
-    public GameObject Sidebar;
-
-    public string SelectedActivity;
+    [SerializeField] public GameObject DescriptionBox;
+    [SerializeField] public GameObject Sidebar;
+    [System.NonSerialized] public string SelectedActivity;
 
     void Awake() {
         if (Instance != null && Instance != this) {

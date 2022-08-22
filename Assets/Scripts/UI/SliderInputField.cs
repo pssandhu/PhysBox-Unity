@@ -6,23 +6,20 @@ using UnityEngine.UI;
 
 public class SliderInputField : MonoBehaviour {
 
-    [SerializeField]
-    public GameObject Slider;
+    [SerializeField] private Slider TargetSlider;
 
     private float minValue;
     private float maxValue;
     private float oldValue;
-
-    [SerializeField]
-    public bool UpdateSliderWithoutNotify = false;
+    [SerializeField] private bool UpdateSliderWithoutNotify = false;
 
     void Start() {
-        minValue = Slider.GetComponent<Slider>().minValue;
-        maxValue = Slider.GetComponent<Slider>().maxValue;
-        UpdateFromSlider(Slider.GetComponent<Slider>().value);
+        minValue = TargetSlider.minValue;
+        maxValue = TargetSlider.maxValue;
+        UpdateFromSlider(TargetSlider.value);
 
-        gameObject.GetComponent<TMP_InputField>().onValueChanged.AddListener(ValidateInput);
-        Slider.GetComponent<Slider>().onValueChanged.AddListener(UpdateFromSlider);
+        GetComponent<TMP_InputField>().onValueChanged.AddListener(ValidateInput);
+        TargetSlider.onValueChanged.AddListener(UpdateFromSlider);
     }
 
     private void ValidateInput(string newInput) {
@@ -42,12 +39,12 @@ public class SliderInputField : MonoBehaviour {
 
             if (newValue < minValue || newValue > maxValue) {
                 Debug.Log("Invalid slider field input");
-                gameObject.GetComponent<TMP_InputField>().text = oldValue.ToString();
+                GetComponent<TMP_InputField>().text = oldValue.ToString();
             } else {
                 if (UpdateSliderWithoutNotify) {
-                    Slider.GetComponent<Slider>().SetValueWithoutNotify(newValue);
+                    TargetSlider.SetValueWithoutNotify(newValue);
                 } else {
-                    Slider.GetComponent<Slider>().value = newValue;
+                    TargetSlider.value = newValue;
                 }
 
                 oldValue = newValue;
@@ -57,6 +54,6 @@ public class SliderInputField : MonoBehaviour {
 
     private void UpdateFromSlider(float newValue) {
         oldValue = newValue;
-        gameObject.GetComponent<TMP_InputField>().text = newValue.ToString();
+        GetComponent<TMP_InputField>().text = newValue.ToString();
     }
 }

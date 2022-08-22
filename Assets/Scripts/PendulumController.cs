@@ -6,27 +6,15 @@ using UnityEngine.UI;
 public class PendulumController : MonoBehaviour {
     private bool simulationActive = false;
 
-    [SerializeField]
-    private GameObject Rod;
-
-    [SerializeField]
-    private GameObject Sphere;
+    [SerializeField] private GameObject Rod;
+    [SerializeField] private GameObject Sphere;
     private float sphereRadius;
 
-    [SerializeField]
-    private Slider InitialPositionSlider;
-
-    [SerializeField]
-    private Slider LengthSlider;
-
-    [SerializeField]
-    private Slider DampingSlider;
-
-    [SerializeField]
-    private Button StartButton;
-
-    [SerializeField]
-    private Button StopButton;
+    [SerializeField] private Slider InitialPositionSlider;
+    [SerializeField] private Slider LengthSlider;
+    [SerializeField] private Slider DampingSlider;
+    [SerializeField] private Button StartButton;
+    [SerializeField] private Button StopButton;
 
     // private float theta;
 
