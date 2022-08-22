@@ -1389,7 +1389,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691020928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -58, y: -7, z: -365}
+  m_LocalPosition: {x: 112, y: -7, z: -365}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1550,7 +1550,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1710106068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -170, y: 100, z: 3.476992}
+  m_LocalPosition: {x: 0, y: 100, z: 3.476992}
   m_LocalScale: {x: 25, y: 25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1668,6 +1668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c918efa949b278499ea302ff755c498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HSlider: {fileID: 1387378800}
+  VSlider: {fileID: 942524370}
 --- !u!1 &1803164680
 GameObject:
   m_ObjectHideFlags: 0

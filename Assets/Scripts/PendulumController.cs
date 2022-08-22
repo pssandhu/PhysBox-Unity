@@ -5,33 +5,32 @@ using UnityEngine.UI;
 
 public class PendulumController : MonoBehaviour {
     private bool simulationActive = false;
-    private Transform pendulumTransform;
 
     [SerializeField]
-    public GameObject Rod;
+    private GameObject Rod;
 
     [SerializeField]
-    public GameObject Sphere;
+    private GameObject Sphere;
     private float sphereRadius;
 
     [SerializeField]
-    public Slider InitialPositionSlider;
+    private Slider InitialPositionSlider;
 
     [SerializeField]
-    public Slider LengthSlider;
+    private Slider LengthSlider;
 
     [SerializeField]
-    public Slider DampingSlider;
+    private Slider DampingSlider;
 
     [SerializeField]
-    public Button StartButton;
+    private Button StartButton;
 
     [SerializeField]
-    public Button StopButton;
+    private Button StopButton;
 
     // private float theta;
 
-    // Natrual frequency in rad/s
+    // Frequency in rad/s
     private float omega;
 
     // Length of rod in metres
@@ -51,22 +50,21 @@ public class PendulumController : MonoBehaviour {
     private float damping;
 
     void Awake() {
-        pendulumTransform = gameObject.GetComponent<Transform>();
-        sphereRadius = Sphere.GetComponent<Transform>().localScale.x;
+        sphereRadius = Sphere.transform.localScale.x / 2;
 
         // Set max damping to less than lowest damping needed for critical damping based on range of parameters
-        float dampingMax = 2 * mass * Mathf.Sqrt(g / (LengthSlider.GetComponent<Slider>().maxValue/100));
-        DampingSlider.GetComponent<Slider>().maxValue = dampingMax - 0.01f;
+        float dampingMax = 2 * mass * Mathf.Sqrt(g / (LengthSlider.maxValue/100));
+        DampingSlider.maxValue = dampingMax - 0.01f;
 
-        SetLength(LengthSlider.GetComponent<Slider>().value);
-        SetInitialPosition(InitialPositionSlider.GetComponent<Slider>().value);
-        SetDamping(DampingSlider.GetComponent<Slider>().value);
+        SetLength(LengthSlider.value);
+        SetInitialPosition(InitialPositionSlider.value);
+        SetDamping(DampingSlider.value);
     }
 
     void FixedUpdate() {
         if (simulationActive) {
             // float dTheta = -g / length * simTime * Mathf.Sin(theta)  * Time.deltaTime;
-            // pendulumTransform.Rotate(0, 0, ToDeg(dTheta));
+            // transform.Rotate(0, 0, ToDeg(dTheta));
             // theta += dTheta;
 
             // Using small angle approximation
@@ -74,7 +72,7 @@ public class PendulumController : MonoBehaviour {
             omega = Mathf.Sqrt(g/length - Mathf.Pow(gamma, 2));
 
             float newTheta = ToRad(initialPosition) * Mathf.Exp(-gamma * simTime) *  Mathf.Cos(omega * simTime);
-            pendulumTransform.rotation = Quaternion.Euler(0, 0, ToDeg(newTheta));
+            transform.rotation = Quaternion.Euler(0, 0, ToDeg(newTheta));
 
             simTime += Time.deltaTime;
         }
@@ -94,7 +92,7 @@ public class PendulumController : MonoBehaviour {
 
     public void StopSimulation() {
         simulationActive = false;
-        pendulumTransform.rotation = Quaternion.Euler(0, 0, initialPosition);
+        transform.rotation = Quaternion.Euler(0, 0, initialPosition);
 
         InitialPositionSlider.interactable = true;
         LengthSlider.interactable = true;
@@ -105,15 +103,22 @@ public class PendulumController : MonoBehaviour {
 
     public void SetInitialPosition(float value) {
         initialPosition = value;
-        if (!simulationActive) {
-            pendulumTransform.rotation = Quaternion.Euler(0, 0, value);
-        }
+        transform.rotation = Quaternion.Euler(0, 0, value);
     }
 
     public void SetLength(float value) {
-        Rod.GetComponent<Transform>().localScale = new Vector3 (2, value / 2, 1);
-        Rod.GetComponent<Transform>().localPosition = new Vector3 (0, -value / 2, 0);
-        Sphere.GetComponent<Transform>().localPosition = new Vector3(0, -1 * (value + sphereRadius / 2), 0);
+        Vector3 temp = Rod.transform.localScale;
+        temp.y = value / 2;
+        Rod.transform.localScale = temp;
+
+        temp = Rod.transform.localPosition;
+        temp.y = -value / 2;
+        Rod.transform.localPosition = temp;
+
+        temp = Sphere.transform.localPosition;
+        temp.y = -1 * (value + sphereRadius);
+        Sphere.transform.localPosition = temp;
+
         length = value / 100;
     }
 
