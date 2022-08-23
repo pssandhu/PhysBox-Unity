@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,13 +14,21 @@ public class PendulumController : MonoBehaviour {
     [SerializeField] private Slider InitialPositionSlider;
     [SerializeField] private Slider LengthSlider;
     [SerializeField] private Slider DampingSlider;
+    [SerializeField] private Toggle AlwaysUseSmallAngleToggle;
     [SerializeField] private Button StartButton;
     [SerializeField] private Button StopButton;
+    [SerializeField] TMP_Text MeasuredPeriodText;
 
-    // private float theta;
+    private float theta;
+    private float velocity;
+    private float acceleration;
 
     // Frequency in rad/s
-    private float omega;
+    // private float omega;
+
+    private float measuredPeriod;
+    private bool stopwatchActive;
+    private int initialVelocitySign;
 
     // Length of rod in metres
     // To change default, min, and max length change the slider properties in the inspector
@@ -51,16 +60,38 @@ public class PendulumController : MonoBehaviour {
 
     void FixedUpdate() {
         if (simulationActive) {
-            // float dTheta = -g / length * simTime * Mathf.Sin(theta)  * Time.deltaTime;
-            // transform.Rotate(0, 0, ToDeg(dTheta));
-            // theta += dTheta;
 
+            if (AlwaysUseSmallAngleToggle.isOn) {
+                acceleration = -g / length * theta - damping / mass * velocity;
+            } else {
+                acceleration = -g / length * Mathf.Sin(theta) - damping / mass * velocity;
+            }
+
+            velocity += acceleration * Time.deltaTime;
+            float deltaTheta = velocity * Time.deltaTime;
+            theta += deltaTheta;
+            transform.Rotate(0, 0, ToDeg(deltaTheta));
+
+            if (stopwatchActive) {
+                measuredPeriod += Time.deltaTime * 2;
+                // deltaTime is not small enough for velocity to reach exactly zero so check for reversal in velocity direction
+                if ((int)(velocity/Mathf.Abs(velocity)) != initialVelocitySign) {
+                    stopwatchActive = false;
+                    Debug.Log("Measured period: " + measuredPeriod);    
+                }
+                Debug.Log("deltaTime: " + Time.deltaTime);
+                Debug.Log("Velocity: " + velocity);
+                MeasuredPeriodText.text = "Measured period: " + measuredPeriod.ToString("0.000") + " s";
+            }
+
+            /*
             // Using small angle approximation
             float gamma = damping / (2 * mass);
             omega = Mathf.Sqrt(g/length - Mathf.Pow(gamma, 2));
 
             float newTheta = ToRad(initialPosition) * Mathf.Exp(-gamma * simTime) *  Mathf.Cos(omega * simTime);
             transform.rotation = Quaternion.Euler(0, 0, ToDeg(newTheta));
+            */
 
             simTime += Time.deltaTime;
         }
@@ -70,11 +101,16 @@ public class PendulumController : MonoBehaviour {
         InitialPositionSlider.interactable = false;
         LengthSlider.interactable = false;
         DampingSlider.interactable = false;
+        AlwaysUseSmallAngleToggle.interactable = false;
         StartButton.gameObject.SetActive(false);
         StopButton.gameObject.SetActive(true);
 
-        // theta = ToRad(initialPosition);
+        theta = ToRad(initialPosition);
+        velocity = 0;
         simTime = 0;
+        measuredPeriod = 0;
+        initialVelocitySign = -1 * (int)(initialPosition/Mathf.Abs(initialPosition));
+        stopwatchActive = true;
         simulationActive = true;
     }
 
@@ -85,6 +121,7 @@ public class PendulumController : MonoBehaviour {
         InitialPositionSlider.interactable = true;
         LengthSlider.interactable = true;
         DampingSlider.interactable = true;
+        AlwaysUseSmallAngleToggle.interactable = true;
         StopButton.gameObject.SetActive(false);
         StartButton.gameObject.SetActive(true);
     }
