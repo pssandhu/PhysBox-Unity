@@ -19,6 +19,13 @@ public class PendulumController : MonoBehaviour {
     [SerializeField] private Button StopButton;
     [SerializeField] TMP_Text MeasuredPeriodText;
 
+    [Header("Time Controls")]
+    [SerializeField] private Toggle RealtimeToggle;
+    [SerializeField] private Slider RealtimeStepSlider;
+    [SerializeField] private Slider StepFrequencySlider;
+    [SerializeField] private Slider TimestepSlider;
+    private float timestep;
+
     private float theta;
     private float velocity;
     private float acceleration;
@@ -56,10 +63,15 @@ public class PendulumController : MonoBehaviour {
         SetLength(LengthSlider.value);
         SetInitialPosition(InitialPositionSlider.value);
         SetDamping(DampingSlider.value);
+        UpdateTimeSettings();
     }
 
     void FixedUpdate() {
         if (simulationActive) {
+            if (RealtimeToggle.isOn) {
+                // Get deltaTime for this update
+                timestep = Time.deltaTime;
+            }
 
             if (AlwaysUseSmallAngleToggle.isOn) {
                 acceleration = -g / length * theta - damping / mass * velocity;
@@ -67,20 +79,25 @@ public class PendulumController : MonoBehaviour {
                 acceleration = -g / length * Mathf.Sin(theta) - damping / mass * velocity;
             }
 
-            velocity += acceleration * Time.deltaTime;
-            float deltaTheta = velocity * Time.deltaTime;
+            velocity += acceleration * timestep;
+            float deltaTheta = velocity * timestep;
             theta += deltaTheta;
             transform.Rotate(0, 0, ToDeg(deltaTheta));
 
             if (stopwatchActive) {
-                measuredPeriod += Time.deltaTime * 2;
-                // deltaTime is not small enough for velocity to reach exactly zero so check for reversal in velocity direction
+                Debug.Log("deltaTime: " + timestep);
+                Debug.Log("Velocity: " + velocity);
+                measuredPeriod += timestep * 2;
+
+                // Simulation is not accurate enough for velocity to reach exactly zero so check for reversal in velocity direction
                 if ((int)(velocity/Mathf.Abs(velocity)) != initialVelocitySign) {
                     stopwatchActive = false;
+                    // Subtract on average half a timestep to account for when the velocity was actually zero
+                    // Then double for the whole period, so subtract a whole timestep
+                    measuredPeriod -= timestep;
                     Debug.Log("Measured period: " + measuredPeriod);    
                 }
-                Debug.Log("deltaTime: " + Time.deltaTime);
-                Debug.Log("Velocity: " + velocity);
+
                 MeasuredPeriodText.text = "Measured period: " + measuredPeriod.ToString("0.000") + " s";
             }
 
@@ -93,7 +110,7 @@ public class PendulumController : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 0, ToDeg(newTheta));
             */
 
-            simTime += Time.deltaTime;
+            simTime += timestep;
         }
     }
 
@@ -102,6 +119,10 @@ public class PendulumController : MonoBehaviour {
         LengthSlider.interactable = false;
         DampingSlider.interactable = false;
         AlwaysUseSmallAngleToggle.interactable = false;
+        // Do not allow timestep to be changed during sim as it changes the result
+        RealtimeToggle.interactable = false;
+        RealtimeStepSlider.interactable = false;
+        TimestepSlider.interactable = false;
         StartButton.gameObject.SetActive(false);
         StopButton.gameObject.SetActive(true);
 
@@ -122,6 +143,9 @@ public class PendulumController : MonoBehaviour {
         LengthSlider.interactable = true;
         DampingSlider.interactable = true;
         AlwaysUseSmallAngleToggle.interactable = true;
+        RealtimeToggle.interactable = true;
+        RealtimeStepSlider.interactable = true;
+        TimestepSlider.interactable = true;
         StopButton.gameObject.SetActive(false);
         StartButton.gameObject.SetActive(true);
     }
@@ -149,6 +173,16 @@ public class PendulumController : MonoBehaviour {
 
     public void SetDamping(float value) {
         damping = value;
+    }
+
+    public void UpdateTimeSettings() {
+        if (RealtimeToggle.isOn) {
+            timestep = RealtimeStepSlider.value;
+            Time.fixedDeltaTime = RealtimeStepSlider.value;
+        } else {
+            timestep = TimestepSlider.value;
+            Time.fixedDeltaTime = 1 / StepFrequencySlider.value;
+        }
     }
 
     private float ToDeg(float value) {
