@@ -7,16 +7,23 @@ using UnityEngine.UI;
 public class PendulumController : MonoBehaviour {
     private bool simulationActive = false;
 
+    [Header("Pendulum")]
     [SerializeField] private GameObject Rod;
     [SerializeField] private GameObject Sphere;
     private float sphereRadius;
 
+    [Header("Pendulum Controls")]
     [SerializeField] private Slider InitialPositionSlider;
     [SerializeField] private Slider LengthSlider;
+    [SerializeField] private Slider MassSlider;
     [SerializeField] private Slider DampingSlider;
     [SerializeField] private Toggle AlwaysUseSmallAngleToggle;
+
+    [Header("Simulation Controls")]
     [SerializeField] private Button StartButton;
     [SerializeField] private Button StopButton;
+
+    [Header("Stats")]
     [SerializeField] TMP_Text MeasuredPeriodText;
 
     [Header("Time Controls")]
@@ -50,20 +57,20 @@ public class PendulumController : MonoBehaviour {
     private const float g = 9.81f;
 
     // Pendulum mass in kg
-    private float mass = 1;
+    private float mass;
     private float damping;
 
     void Awake() {
         sphereRadius = Sphere.transform.localScale.x / 2;
-
-        // Set max damping to less than lowest damping needed for critical damping based on range of parameters
-        float dampingMax = 2 * mass * Mathf.Sqrt(g / (LengthSlider.maxValue/100));
-        DampingSlider.maxValue = dampingMax - 0.01f;
-
-        SetLength(LengthSlider.value);
         SetInitialPosition(InitialPositionSlider.value);
+        SetLength(LengthSlider.value);
+        SetMass(MassSlider.value);
         SetDamping(DampingSlider.value);
         UpdateTimeSettings();
+
+        // Set max damping to less than lowest damping needed for critical damping based on range of parameters
+        float dampingMax = 2 * MassSlider.minValue * Mathf.Sqrt(g / (LengthSlider.maxValue/100));
+        DampingSlider.maxValue = dampingMax - 0.01f;
     }
 
     void FixedUpdate() {
@@ -117,6 +124,7 @@ public class PendulumController : MonoBehaviour {
     public void StartSimulation() {
         InitialPositionSlider.interactable = false;
         LengthSlider.interactable = false;
+        MassSlider.interactable = false;
         DampingSlider.interactable = false;
         AlwaysUseSmallAngleToggle.interactable = false;
         // Do not allow timestep to be changed during sim as it changes the result
@@ -141,6 +149,7 @@ public class PendulumController : MonoBehaviour {
 
         InitialPositionSlider.interactable = true;
         LengthSlider.interactable = true;
+        MassSlider.interactable = true;
         DampingSlider.interactable = true;
         AlwaysUseSmallAngleToggle.interactable = true;
         RealtimeToggle.interactable = true;
@@ -169,6 +178,10 @@ public class PendulumController : MonoBehaviour {
         Sphere.transform.localPosition = temp;
 
         length = value / 100;
+    }
+
+    public void SetMass(float value) {
+        mass = value;
     }
 
     public void SetDamping(float value) {
