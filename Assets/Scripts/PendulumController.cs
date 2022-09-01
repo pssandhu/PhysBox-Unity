@@ -69,7 +69,7 @@ public class PendulumController : MonoBehaviour {
         UpdateTimeSettings();
 
         // Set max damping to less than lowest damping needed for critical damping based on range of parameters
-        float dampingMax = 2 * MassSlider.minValue * Mathf.Sqrt(g / (LengthSlider.maxValue/100));
+        float dampingMax = 2 * MassSlider.minValue * Mathf.Sqrt(g / LengthSlider.maxValue);
         DampingSlider.maxValue = dampingMax - 0.01f;
     }
 
@@ -166,18 +166,18 @@ public class PendulumController : MonoBehaviour {
 
     public void SetLength(float value) {
         Vector3 temp = Rod.transform.localScale;
-        temp.y = value / 2;
+        temp.y = (value * 100) / 2;
         Rod.transform.localScale = temp;
 
         temp = Rod.transform.localPosition;
-        temp.y = -value / 2;
+        temp.y = -1 * (value * 100) / 2;
         Rod.transform.localPosition = temp;
 
         temp = Sphere.transform.localPosition;
-        temp.y = -1 * (value + sphereRadius);
+        temp.y = -1 * (value * 100 + sphereRadius);
         Sphere.transform.localPosition = temp;
 
-        length = value / 100;
+        length = value;
     }
 
     public void SetMass(float value) {

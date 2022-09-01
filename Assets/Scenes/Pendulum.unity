@@ -371,6 +371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 152277154}
   - component: {fileID: 152277155}
+  - component: {fileID: 152277156}
   m_Layer: 5
   m_Name: LengthSlider
   m_TagString: Untagged
@@ -445,11 +446,27 @@ MonoBehaviour:
   m_FillRect: {fileID: 1881451424}
   m_HandleRect: {fileID: 390879712}
   m_Direction: 0
-  m_MinValue: 50
-  m_MaxValue: 200
-  m_WholeNumbers: 1
-  m_Value: 150
+  m_MinValue: 0.5
+  m_MaxValue: 2
+  m_WholeNumbers: 0
+  m_Value: 1.5
   m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &152277156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152277153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbc36f20e73fd284e946bfeba8889364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Step: 0.01
+  onValueValidated:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 391154002}
@@ -1151,15 +1168,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_Text
-      value: 150
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_ContentType
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_KeyboardType
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_CharacterLimit
@@ -1167,7 +1184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_CharacterValidation
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 714264941492791950, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: Slider
@@ -3499,6 +3516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1258438289}
   - component: {fileID: 1258438290}
+  - component: {fileID: 1258438291}
   m_Layer: 5
   m_Name: MassSlider
   m_TagString: Untagged
@@ -3575,9 +3593,25 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 1
   m_MaxValue: 50
-  m_WholeNumbers: 1
+  m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1258438291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258438288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbc36f20e73fd284e946bfeba8889364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Step: 0.1
+  onValueValidated:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 391154002}
@@ -4237,7 +4271,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 12.1, y: 67}
-  m_SizeDelta: {x: 105.6762, y: 20.8554}
+  m_SizeDelta: {x: 95.921, y: 20.8554}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1483810200
 MonoBehaviour:
@@ -4259,7 +4293,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Length / cm
+  m_text: Length / m
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
