@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Slider))]
 public class SliderStep : MonoBehaviour {
 
-    [SerializeField] private float Step = 0.5f;
+    public float Step = 0.5f;
     private Slider slider;
     public UnityEvent<float> onValueValidated;
 

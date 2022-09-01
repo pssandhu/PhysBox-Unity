@@ -335,10 +335,6 @@ PrefabInstance:
       propertyPath: TargetSlider
       value: 
       objectReference: {fileID: 942524370}
-    - target: {fileID: 714264941492791950, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
-      propertyPath: UpdateSliderWithoutNotify
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4570729550794343967, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_Name
       value: VSliderInputField
@@ -962,6 +958,7 @@ GameObject:
   m_Component:
   - component: {fileID: 942524369}
   - component: {fileID: 942524370}
+  - component: {fileID: 942524371}
   m_Layer: 5
   m_Name: VSlider
   m_TagString: Untagged
@@ -1043,6 +1040,22 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &942524371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942524368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbc36f20e73fd284e946bfeba8889364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Step: 0.01
+  onValueValidated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &1265438370 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 714264941492791946, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
@@ -1058,6 +1071,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1387378799}
   - component: {fileID: 1387378800}
+  - component: {fileID: 1387378801}
   m_Layer: 5
   m_Name: HSlider
   m_TagString: Untagged
@@ -1137,6 +1151,22 @@ MonoBehaviour:
   m_WholeNumbers: 0
   m_Value: 0.5
   m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1387378801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387378798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbc36f20e73fd284e946bfeba8889364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Step: 0.01
+  onValueValidated:
     m_PersistentCalls:
       m_Calls: []
 --- !u!224 &1441498925 stripped
@@ -1990,10 +2020,6 @@ PrefabInstance:
       propertyPath: TargetSlider
       value: 
       objectReference: {fileID: 1387378800}
-    - target: {fileID: 714264941492791950, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
-      propertyPath: UpdateSliderWithoutNotify
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4570729550794343967, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_Name
       value: HSliderInputField

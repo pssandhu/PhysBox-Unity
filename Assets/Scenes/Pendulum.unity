@@ -1180,7 +1180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_CharacterLimit
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_CharacterValidation
@@ -2323,19 +2323,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: m_ContentType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
-      propertyPath: m_KeyboardType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
-      propertyPath: m_CharacterLimit
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
-      propertyPath: m_CharacterValidation
+      propertyPath: m_KeyboardType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
+      propertyPath: m_CharacterLimit
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 714264941492791947, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
+      propertyPath: m_CharacterValidation
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 714264941492791950, guid: e712c8e9b294cdb448191c78d37e83b7, type: 3}
       propertyPath: Slider
