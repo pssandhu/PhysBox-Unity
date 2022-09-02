@@ -28,8 +28,8 @@ public class SinusoidalSpeedComponents : MonoBehaviour {
         xSpeed = HSlider.value;
         ySpeed = VSlider.value;
 
-        float xPos = Mathf.Sin(2 * pi * xSpeed * Time.timeSinceLevelLoad);
-        float yPos = Mathf.Cos(2 * pi * ySpeed * Time.timeSinceLevelLoad);
+        float xPos = Mathf.Sin(2 * (float)pi * xSpeed * Time.timeSinceLevelLoad);
+        float yPos = Mathf.Cos(2 * (float)pi * ySpeed * Time.timeSinceLevelLoad);
         transform.localPosition = new Vector3(xPos, yPos, zPos);
 
         // Clear trail after moving object to also clear the jump in the trail

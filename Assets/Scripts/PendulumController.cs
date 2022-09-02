@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -33,33 +34,33 @@ public class PendulumController : MonoBehaviour {
     [SerializeField] private Slider RealtimeStepSlider;
     [SerializeField] private Slider StepFrequencySlider;
     [SerializeField] private Slider TimestepSlider;
-    private float timestep;
+    private double timestep;
 
-    private float theta;
-    private float velocity;
-    private float acceleration;
+    private double theta;
+    private double velocity;
+    private double acceleration;
 
     // Frequency in rad/s
     // private float omega;
 
-    private float measuredPeriod;
+    private double measuredPeriod;
     private bool stopwatchActive;
     private int initialVelocitySign;
 
     // Length of rod in metres
     // To change default, min, and max length change the slider properties in the inspector
-    private float length;
+    private double length;
 
     // Time as simulation progresses in seconds
-    private float simTime;
+    private double simTime;
 
     // Initial position of pendulum in degrees
     // To change default, min, and max initial position change the slider properties in the inspector
     private float initialPosition;
 
     // Pendulum mass in kg
-    private float mass;
-    private float damping;
+    private double mass;
+    private double damping;
 
     void Awake() {
         sphereRadius = Sphere.transform.localScale.x / 2;
@@ -70,8 +71,8 @@ public class PendulumController : MonoBehaviour {
         UpdateTimeSettings();
 
         // Set max damping to less than lowest damping needed for critical damping based on range of parameters
-        float dampingMax = 2 * MassSlider.minValue * Mathf.Sqrt(g / LengthSlider.maxValue);
-        DampingSlider.maxValue = dampingMax - 0.01f;
+        double dampingMax = 2 * MassSlider.minValue * Math.Sqrt(g / LengthSlider.maxValue);
+        DampingSlider.maxValue = (float)dampingMax - 0.01f;
     }
 
     void FixedUpdate() {
@@ -84,13 +85,13 @@ public class PendulumController : MonoBehaviour {
             if (AlwaysUseSmallAngleToggle.isOn) {
                 acceleration = -g / length * theta - damping / mass * velocity;
             } else {
-                acceleration = -g / length * Mathf.Sin(theta) - damping / mass * velocity;
+                acceleration = -g / length * Math.Sin(theta) - damping / mass * velocity;
             }
 
             velocity += acceleration * timestep;
-            float deltaTheta = velocity * timestep;
+            double deltaTheta = velocity * timestep;
             theta += deltaTheta;
-            transform.Rotate(0, 0, ToDeg(deltaTheta));
+            transform.Rotate(0, 0, (float)ToDeg(deltaTheta));
 
             if (stopwatchActive) {
                 Debug.Log("deltaTime: " + timestep);
@@ -98,15 +99,14 @@ public class PendulumController : MonoBehaviour {
                 measuredPeriod += timestep * 2;
 
                 // Simulation is not accurate enough for velocity to reach exactly zero so check for reversal in velocity direction
-                if ((int)(velocity/Mathf.Abs(velocity)) != initialVelocitySign) {
+                if ((int)(velocity/Math.Abs(velocity)) != initialVelocitySign) {
                     stopwatchActive = false;
                     // Subtract on average half a timestep to account for when the velocity was actually zero
-                    // Then double for the whole period, so subtract a whole timestep
-                    measuredPeriod -= timestep;
+                    measuredPeriod -= 0.5 * timestep;
                     Debug.Log("Measured period: " + measuredPeriod);    
                 }
 
-                MeasuredPeriodText.text = "Measured period: " + measuredPeriod.ToString("0.000") + " s";
+                MeasuredPeriodText.text = "Measured period: " + measuredPeriod.ToString("0.0000") + " s";
             }
 
             /*
@@ -169,15 +169,15 @@ public class PendulumController : MonoBehaviour {
         length = value;
 
         Vector3 temp = Rod.transform.localScale;
-        temp.y = length / 2;
+        temp.y = value / 2;
         Rod.transform.localScale = temp;
 
         temp = Rod.transform.localPosition;
-        temp.y = -1 * length / 2;
+        temp.y = -1 * value / 2;
         Rod.transform.localPosition = temp;
 
         temp = Sphere.transform.localPosition;
-        temp.y = -1 * (length + sphereRadius);
+        temp.y = -1 * (value + sphereRadius);
         Sphere.transform.localPosition = temp;
     }
 
