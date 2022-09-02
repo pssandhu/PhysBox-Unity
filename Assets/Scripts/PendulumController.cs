@@ -166,19 +166,19 @@ public class PendulumController : MonoBehaviour {
     }
 
     public void SetLength(float value) {
+        length = value;
+
         Vector3 temp = Rod.transform.localScale;
-        temp.y = (value * 100) / 2;
+        temp.y = length / 2;
         Rod.transform.localScale = temp;
 
         temp = Rod.transform.localPosition;
-        temp.y = -1 * (value * 100) / 2;
+        temp.y = -1 * length / 2;
         Rod.transform.localPosition = temp;
 
         temp = Sphere.transform.localPosition;
-        temp.y = -1 * (value * 100 + sphereRadius);
+        temp.y = -1 * (length + sphereRadius);
         Sphere.transform.localPosition = temp;
-
-        length = value;
     }
 
     public void SetMass(float value) {

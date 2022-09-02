@@ -11,10 +11,12 @@ public class SinusoidalSpeedComponents : MonoBehaviour {
     private TrailRenderer trail;
 
     // Set initial values in inspector
+    private float zPos;
     private float xSpeed;
     private float ySpeed;
 
     void Start() {
+        zPos = transform.localPosition.z;
         xSpeed = HSlider.value;
         ySpeed = VSlider.value;
         trail = GetComponent<TrailRenderer>();
@@ -26,9 +28,9 @@ public class SinusoidalSpeedComponents : MonoBehaviour {
         xSpeed = HSlider.value;
         ySpeed = VSlider.value;
 
-        float xPos = 100 * Mathf.Sin(2 * pi * xSpeed * Time.timeSinceLevelLoad);
-        float yPos = 100 * Mathf.Cos(2 * pi * ySpeed * Time.timeSinceLevelLoad);
-        transform.localPosition = new Vector3(xPos, yPos, -1);
+        float xPos = Mathf.Sin(2 * pi * xSpeed * Time.timeSinceLevelLoad);
+        float yPos = Mathf.Cos(2 * pi * ySpeed * Time.timeSinceLevelLoad);
+        transform.localPosition = new Vector3(xPos, yPos, zPos);
 
         // Clear trail after moving object to also clear the jump in the trail
         if (xSpeed != xSpeedOld || ySpeed != ySpeedOld) {
