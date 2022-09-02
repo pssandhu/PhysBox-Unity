@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static PhysBox.Constants;
+using static PhysBox.Utils;
 
 public class PendulumController : MonoBehaviour {
     private bool simulationActive = false;
@@ -54,7 +56,6 @@ public class PendulumController : MonoBehaviour {
     // Initial position of pendulum in degrees
     // To change default, min, and max initial position change the slider properties in the inspector
     private float initialPosition;
-    private const float g = 9.81f;
 
     // Pendulum mass in kg
     private float mass;
@@ -198,11 +199,4 @@ public class PendulumController : MonoBehaviour {
         }
     }
 
-    private float ToDeg(float value) {
-        return 180 * value / Mathf.PI;
-    }
-
-    private float ToRad(float value) {
-        return Mathf.PI * value / 180;
-    }
 }

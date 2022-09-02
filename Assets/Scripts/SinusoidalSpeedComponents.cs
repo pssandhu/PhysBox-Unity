@@ -1,8 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static PhysBox.Constants;
 
 public class SinusoidalSpeedComponents : MonoBehaviour {
 
@@ -26,8 +26,8 @@ public class SinusoidalSpeedComponents : MonoBehaviour {
         xSpeed = HSlider.value;
         ySpeed = VSlider.value;
 
-        float xPos = 100 * (float)Math.Sin(2 * Math.PI * xSpeed * Time.timeSinceLevelLoad);
-        float yPos = 100 * (float)Math.Cos(2 * Math.PI * ySpeed * Time.timeSinceLevelLoad);
+        float xPos = 100 * Mathf.Sin(2 * pi * xSpeed * Time.timeSinceLevelLoad);
+        float yPos = 100 * Mathf.Cos(2 * pi * ySpeed * Time.timeSinceLevelLoad);
         transform.localPosition = new Vector3(xPos, yPos, -1);
 
         // Clear trail after moving object to also clear the jump in the trail
