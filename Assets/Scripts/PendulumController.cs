@@ -29,11 +29,8 @@ public class PendulumController : MonoBehaviour {
     [Header("Stats")]
     [SerializeField] TMP_Text MeasuredPeriodText;
 
-    [Header("Time Controls")]
-    [SerializeField] private Toggle RealtimeToggle;
-    [SerializeField] private Slider RealtimeStepSlider;
-    [SerializeField] private Slider StepFrequencySlider;
-    [SerializeField] private Slider TimestepSlider;
+    [Header("Time Settings")]
+    [SerializeField] private TimeSettings TimeSettings;
     private double timestep;
 
     private double theta;
@@ -68,6 +65,7 @@ public class PendulumController : MonoBehaviour {
         SetLength(LengthSlider.value);
         SetMass(MassSlider.value);
         SetDamping(DampingSlider.value);
+        TimeSettings.onSettingsChanged.AddListener(UpdateTimeSettings);
         UpdateTimeSettings();
 
         // Set max damping to less than lowest damping needed for critical damping based on range of parameters
@@ -77,7 +75,7 @@ public class PendulumController : MonoBehaviour {
 
     void FixedUpdate() {
         if (simulationActive) {
-            if (RealtimeToggle.isOn) {
+            if (TimeSettings.RealtimeToggle.isOn) {
                 // Get deltaTime for this update
                 timestep = Time.deltaTime;
             }
@@ -129,9 +127,9 @@ public class PendulumController : MonoBehaviour {
         DampingSlider.interactable = false;
         AlwaysUseSmallAngleToggle.interactable = false;
         // Do not allow timestep to be changed during sim as it changes the result
-        RealtimeToggle.interactable = false;
-        RealtimeStepSlider.interactable = false;
-        TimestepSlider.interactable = false;
+        TimeSettings.RealtimeToggle.interactable = false;
+        TimeSettings.RealtimeStepSlider.interactable = false;
+        TimeSettings.TimestepSlider.interactable = false;
         StartButton.gameObject.SetActive(false);
         StopButton.gameObject.SetActive(true);
 
@@ -153,9 +151,9 @@ public class PendulumController : MonoBehaviour {
         MassSlider.interactable = true;
         DampingSlider.interactable = true;
         AlwaysUseSmallAngleToggle.interactable = true;
-        RealtimeToggle.interactable = true;
-        RealtimeStepSlider.interactable = true;
-        TimestepSlider.interactable = true;
+        TimeSettings.RealtimeToggle.interactable = true;
+        TimeSettings.RealtimeStepSlider.interactable = true;
+        TimeSettings.TimestepSlider.interactable = true;
         StopButton.gameObject.SetActive(false);
         StartButton.gameObject.SetActive(true);
     }
@@ -190,12 +188,12 @@ public class PendulumController : MonoBehaviour {
     }
 
     public void UpdateTimeSettings() {
-        if (RealtimeToggle.isOn) {
-            timestep = RealtimeStepSlider.value;
-            Time.fixedDeltaTime = RealtimeStepSlider.value;
+        if (TimeSettings.RealtimeToggle.isOn) {
+            timestep = TimeSettings.RealtimeStepSlider.value;
+            Time.fixedDeltaTime = TimeSettings.RealtimeStepSlider.value;
         } else {
-            timestep = TimestepSlider.value;
-            Time.fixedDeltaTime = 1 / StepFrequencySlider.value;
+            timestep = TimeSettings.TimestepSlider.value;
+            Time.fixedDeltaTime = 1 / TimeSettings.StepFrequencySlider.value;
         }
     }
 

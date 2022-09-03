@@ -3,18 +3,26 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class TimeSettings : MonoBehaviour {
 
-    [SerializeField] private Toggle RealtimeToggle;
+    public Toggle RealtimeToggle;
     [SerializeField] private TMP_Text RealtimeStepText;
-    [SerializeField] private Slider RealtimeStepSlider;
+    public Slider RealtimeStepSlider;
     [SerializeField] private TMP_Text StepFrequencyText;
-    [SerializeField] private Slider StepFrequencySlider;
+    public Slider StepFrequencySlider;
     [SerializeField] private TMP_Text TimestepText;
-    [SerializeField] private Slider TimestepSlider;
+    public Slider TimestepSlider;
+
+    public UnityEvent onSettingsChanged;
 
     void Start() {
+        RealtimeToggle.onValueChanged.AddListener((x) => onSettingsChanged.Invoke());
+        RealtimeStepSlider.onValueChanged.AddListener((x) => onSettingsChanged.Invoke());
+        StepFrequencySlider.onValueChanged.AddListener((x) => onSettingsChanged.Invoke());
+        TimestepSlider.onValueChanged.AddListener((x) => onSettingsChanged.Invoke());
+
         UpdateTimeControls();
     }
 

@@ -1592,10 +1592,7 @@ MonoBehaviour:
   StartButton: {fileID: 1255025282}
   StopButton: {fileID: 576704609}
   MeasuredPeriodText: {fileID: 1766800480}
-  RealtimeToggle: {fileID: 1302791344}
-  RealtimeStepSlider: {fileID: 1053841238}
-  StepFrequencySlider: {fileID: 1810449365}
-  TimestepSlider: {fileID: 802059796}
+  TimeSettings: {fileID: 1077265143}
 --- !u!1 &397987339
 GameObject:
   m_ObjectHideFlags: 0
@@ -2781,19 +2778,7 @@ MonoBehaviour:
   m_Value: 0.01
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 391154002}
-        m_TargetAssemblyTypeName: PendulumController, Assembly-CSharp
-        m_MethodName: UpdateTimeSettings
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &826669399
 GameObject:
   m_ObjectHideFlags: 0
@@ -3127,19 +3112,7 @@ MonoBehaviour:
   m_Value: 0.01
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 391154002}
-        m_TargetAssemblyTypeName: PendulumController, Assembly-CSharp
-        m_MethodName: UpdateTimeSettings
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1071940530
 GameObject:
   m_ObjectHideFlags: 0
@@ -3240,6 +3213,9 @@ MonoBehaviour:
   StepFrequencySlider: {fileID: 1810449365}
   TimestepText: {fileID: 1690343551}
   TimestepSlider: {fileID: 802059796}
+  onSettingsChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1093532215
 GameObject:
   m_ObjectHideFlags: 0
@@ -3889,18 +3865,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1077265143}
         m_TargetAssemblyTypeName: TimeSettings, Assembly-CSharp
         m_MethodName: UpdateTimeControls
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 391154002}
-        m_TargetAssemblyTypeName: PendulumController, Assembly-CSharp
-        m_MethodName: UpdateTimeSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5258,19 +5222,7 @@ MonoBehaviour:
   m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 391154002}
-        m_TargetAssemblyTypeName: PendulumController, Assembly-CSharp
-        m_MethodName: UpdateTimeSettings
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1861326966
 GameObject:
   m_ObjectHideFlags: 0
